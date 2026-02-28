@@ -1,128 +1,269 @@
-const header = document.querySelector(".header");
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-        header.style.boxShadow = "0 10px 30px rgba(0,0,0,0.4)";
-    } else {
-        header.style.boxShadow = "none";
-    }
-});
-const sections = document.querySelectorAll("section");
-const revealSection = () => {
-    const triggerBottom = window.innerHeight * 0.85;
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop < triggerBottom) {
-            section.style.opacity = "1";
-            section.style.transform = "translateY(0)";
-        }
-    });
-};
-sections.forEach(section => {
-    section.style.opacity = "0";
-    section.style.transform = "translateY(50px)";
-    section.style.transition = "all 0.8s ease";
-});
-window.addEventListener("scroll", revealSection);
-revealSection();
+// ===== TYPING ANIMATION =====
 const roles = [
-    "Aspiring Software Engineer",
-    "Aspiring Machine Learning Engineer"
+    'Software Engineer',
+    'AI/ML Enthusiast',
+    'Data Scientist',
+    'Full Stack Developer'
 ];
+
 let roleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-const typedText = document.getElementById("typed-text");
-function typeEffect() {
+
+function typeRole() {
+    const typedText = document.getElementById('typed-text');
+    if (!typedText) return;
     const currentRole = roles[roleIndex];
 
     if (!isDeleting) {
-        typedText.textContent = currentRole.slice(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === currentRole.length) {
-            setTimeout(() => isDeleting = true, 1200);
+        if (charIndex < currentRole.length) {
+            typedText.textContent += currentRole.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeRole, 80);
+        } else {
+            isDeleting = true;
+            setTimeout(typeRole, 2000);
         }
     } else {
-        typedText.textContent = currentRole.slice(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
+        if (charIndex > 0) {
+            typedText.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(typeRole, 50);
+        } else {
             isDeleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
+            setTimeout(typeRole, 500);
         }
     }
-    const speed = isDeleting ? 60 : 120;
-    setTimeout(typeEffect, speed);
 }
-typeEffect();
-const nameElement = document.querySelector(".hover-name");
-const text = nameElement.textContent;
-nameElement.textContent = "";
-[...text].forEach(char => {
-    const span = document.createElement("span");
-    span.textContent = char === " " ? "\u00A0" : char;
-    span.classList.add("char");
-    nameElement.appendChild(span);
-});
-const hero = document.querySelector(".hero");
 
-particlesJS("particles-js", {
-  particles: {
-    number: {
-      value: 500,
-      density: {
-        enable: true,
-        value_area: 900
-      }
-    },
-    color: {
-      value: ["#38bdf8", "#22d3ee"]
-    },
-    shape: { type: "circle" },
-    opacity: {
-      value: 5,
-      random: true
-    },
-    size: {
-      value: 2,
-      random: true
-    },
-    line_linked: {
-      enable: true,
-      distance: 100,
-      color: "#38bdf8",
-      opacity: 0.25,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 2,
-      out_mode: "out"
+// ===== SIDEBAR / MOBILE MENU TOGGLE =====
+const menuToggle = document.getElementById('menu-toggle');
+const sidebar = document.querySelector('.sidebar');
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const body = document.body;
+
+function updateSidebarToggleState() {
+    if (!sidebarToggle) return;
+    const isCollapsed = body.classList.contains('sidebar-collapsed');
+    const icon = sidebarToggle.querySelector('i');
+
+    sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Open sidebar' : 'Close sidebar');
+    sidebarToggle.setAttribute('aria-expanded', String(!isCollapsed));
+
+    if (icon) {
+        icon.classList.toggle('fa-chevron-left', !isCollapsed);
+        icon.classList.toggle('fa-chevron-right', isCollapsed);
     }
-  },
+}
 
-  interactivity: {
-    detect_on: "window", 
-    events: {
-      onhover: {
-        enable: true,
-        mode: "repulse"
-      },
-      onclick: {
-        enable: true,
-        mode: "push"
-      },
-      resize: true
-    },
-    modes: {
-      repulse: {
-        distance: 100,
-        duration: 0.8,
-        speed: 0.8
-      },
-      push: {
-        particles_nb: 4
-      }
-    }
-  },
+// make sure the button has a defined expanded state
+if (menuToggle) {
+    menuToggle.setAttribute('aria-expanded', 'false');
+}
 
-  retina_detect: true
+if (menuToggle && sidebar) {
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        const expanded = sidebar.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', String(expanded));
+    });
+}
+
+if (sidebarToggle) {
+    updateSidebarToggleState();
+
+    sidebarToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (window.innerWidth <= 768 && sidebar) {
+            sidebar.classList.toggle('active');
+            const expanded = sidebar.classList.contains('active');
+            if (menuToggle) {
+                menuToggle.setAttribute('aria-expanded', String(expanded));
+            }
+            return;
+        }
+
+        body.classList.toggle('sidebar-collapsed');
+        updateSidebarToggleState();
+    });
+}
+
+// Close sidebar when a nav item is clicked
+const navItems = document.querySelectorAll('.nav-item');
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        if (sidebar) {
+            sidebar.classList.remove('active');
+        }
+        if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
 });
+
+// Close sidebar when clicking outside
+document.addEventListener('click', (e) => {
+    if (!sidebar) return;
+    const clickedMenuToggle = menuToggle && menuToggle.contains(e.target);
+    const clickedSidebarToggle = sidebarToggle && sidebarToggle.contains(e.target);
+    if (!sidebar.contains(e.target) && !clickedMenuToggle && !clickedSidebarToggle) {
+        sidebar.classList.remove('active');
+        if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
+});
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && sidebar) {
+        sidebar.classList.remove('active');
+        if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
+    updateSidebarToggleState();
+});
+
+// ===== ACTIVE NAV HIGHLIGHTING =====
+function updateActiveNav() {
+    const sections = document.querySelectorAll('section');
+    let current = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (scrollY >= sectionTop - 300) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// ===== SCROLL REVEAL ANIMATION =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('reveal');
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+// Observe all cards and content
+document.querySelectorAll('.education-card, .skill-item, .project-card, .skills-column').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+});
+
+// ===== SKILL BAR ANIMATION =====
+function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    skillBars.forEach(bar => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(bar);
+    });
+}
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', () => {
+    typeRole();
+    animateSkillBars();
+    updateActiveNav();
+});
+
+// Update active nav on scroll
+window.addEventListener('scroll', updateActiveNav);
+
+// Smooth page transitions
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+});
+
+// Add some parallax effect on mouse move for hero section
+const heroImage = document.querySelector('.hero-image img');
+if (heroImage) {
+    document.addEventListener('mousemove', (e) => {
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 10;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
+        
+        heroImage.style.transform = `translateX(${mouseX}px) translateY(${mouseY}px)`;
+    });
+}
+
+// Reset parallax on mouse leave
+document.addEventListener('mouseleave', () => {
+    if (heroImage) {
+        heroImage.style.transform = 'translateX(0) translateY(0)';
+    }
+});
+// ===== CONTACT FORM HANDLING =====
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+        
+        // Log the form data (in production, send to backend)
+        console.log('Form submitted with data:', data);
+        
+        // Show success message
+        const button = contactForm.querySelector('.contact-btn');
+        const originalText = button.textContent;
+        button.textContent = 'Message Sent! ✓';
+        button.style.background = 'var(--green-accent)';
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '';
+        }, 3000);
+    });
+}
