@@ -59,6 +59,9 @@
             </div>
         </div>
     </aside>
+    <button class="sidebar-toggle-btn" id="sidebar-toggle" aria-label="Close sidebar" aria-expanded="true">
+        <i class="fas fa-chevron-left"></i>
+    </button>
 
     <!-- ===== TOP HEADER (Mobile) ===== -->
     <header class="header">
@@ -93,36 +96,57 @@
     </section>
     <!-- ===== ABOUT ===== -->
     <section id="about" class="about">
-        <div class="about-content">
-            <h2>About Me</h2>
-            <h3>Who is Sanchit Kukreja?</h3>
-            <p>
-                I'm Sanchit Kukreja, a Software Engineer and AI/ML Developer with a passion for building intelligent,
-                scalable solutions using data-driven approaches. Currently pursuing B.Tech at Bennett University,
-                I specialize in machine learning, deep learning, and web development. With a strong foundation in
-                algorithms and software engineering principles, I love turning complex problems into working
-                applications. I continuously learn by working on real-world projects and collaborating with fellow
-                engineers and researchers.
-            </p>
-
-            <div class="about-stats">
-                <div class="stat-card">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">Projects Completed</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">150+</span>
-                    <span class="stat-label">LeetCode Problems Solved</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">100+</span>
-                    <span class="stat-label">GitHub Contributions</span>
+        <div class="about-layout">
+            <div class="about-visual">
+                <div class="about-photo-card">
+                    <div class="about-chip-row">
+                        <span class="about-chip about-chip-top"><i class="fas fa-circle"></i> AI/ML Developer</span>
+                        <span class="about-chip about-chip-top"><i class="fas fa-circle"></i> Software Engineer</span>
+                    </div>
+                    <div class="about-photo-wrap">
+                        <img src="assets/images/image.jpg" alt="Sanchit Kukreja portrait" class="about-photo">
+                    </div>
+                    <span class="about-chip about-chip-bottom"><i class="fas fa-code"></i> Building Real Projects</span>
                 </div>
             </div>
 
-            <p class="contact-line">
-                Email: <a href="mailto:ksanchit778899@gmail.com">ksanchit778899@gmail.com</a>
-            </p>
+            <div class="about-content">
+                <h2>About Me</h2>
+                <h3>Who is Sanchit Kukreja?</h3>
+                <p>
+                    I'm Sanchit Kukreja, a Software Engineer and AI/ML Developer with a passion for building intelligent,
+                    scalable solutions using data-driven approaches. Currently pursuing B.Tech at Bennett University,
+                    I specialize in machine learning, deep learning, and web development. With a strong foundation in
+                    algorithms and software engineering principles, I love turning complex problems into working
+                    applications. I continuously learn by working on real-world projects and collaborating with fellow
+                    engineers and researchers.
+                </p>
+
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">LeetCode Problems Solved</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">GitHub Projects</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">GitHub Contributions</span>
+                    </div>
+                </div>
+
+                <p class="contact-line">
+                    Email: <a href="mailto:ksanchit778899@gmail.com">ksanchit778899@gmail.com</a>
+                </p>
+                <p class="contact-line">
+                    LeetCode: <a href="https://leetcode.com/u/Sanxhitk99/" target="_blank" rel="noopener noreferrer">leetcode.com/u/Sanxhitk99/</a>
+                </p>
+                <p class="contact-line">
+                    GitHub: <a href="https://github.com/Sanchitk99/" target="_blank" rel="noopener noreferrer">github.com/Sanchitk99/</a>
+                </p>
+            </div>
         </div>
     </section>
     <!-- ===== EDUCATION ===== -->
@@ -172,7 +196,7 @@
     <!-- ===== SKILLS ===== -->
     <section id="skills" class="skills">
         <h2 class="section-title">My Skills</h2>
-        <p class="section-subtitle">The languages I speak and my proficiency level in each</p>
+        <p class="section-subtitle">Core technologies I use and how I apply them in real projects</p>
         
         <div class="skills-container">
             <div class="skills-column">
@@ -180,37 +204,41 @@
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Python</span>
-                        <span class="skill-percent">90%</span>
+                        <span class="skill-level level-advanced">Advanced</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
+                    <p class="skill-context">Used for ML workflows, automation scripts, and backend problem-solving.</p>
+                    <div class="skill-tags">
+                        <span>NumPy</span><span>Pandas</span><span>scikit-learn</span>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">C++</span>
-                        <span class="skill-percent">85%</span>
+                        <span class="skill-level level-strong">Strong</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%;"></div>
+                    <p class="skill-context">Solid DSA and competitive programming foundation.</p>
+                    <div class="skill-tags">
+                        <span>STL</span><span>OOP</span><span>Problem Solving</span>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Java</span>
-                        <span class="skill-percent">80%</span>
+                        <span class="skill-level level-strong">Strong</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 80%;"></div>
+                    <p class="skill-context">Applied in object-oriented coursework and coding practice.</p>
+                    <div class="skill-tags">
+                        <span>OOP</span><span>Collections</span><span>Core Java</span>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">JavaScript</span>
-                        <span class="skill-percent">75%</span>
+                        <span class="skill-level level-working">Working</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%;"></div>
+                    <p class="skill-context">Used to add UI behavior, interactivity, and animations.</p>
+                    <div class="skill-tags">
+                        <span>DOM</span><span>ES6+</span><span>UI Logic</span>
                     </div>
                 </div>
             </div>
@@ -220,37 +248,41 @@
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Machine Learning</span>
-                        <span class="skill-percent">88%</span>
+                        <span class="skill-level level-advanced">Advanced</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 88%;"></div>
+                    <p class="skill-context">Built predictive models for forecasting and classification tasks.</p>
+                    <div class="skill-tags">
+                        <span>Model Training</span><span>Feature Engineering</span><span>Evaluation</span>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Deep Learning & Neural Networks</span>
-                        <span class="skill-percent">85%</span>
+                        <span class="skill-level level-strong">Strong</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%;"></div>
+                    <p class="skill-context">Experience with neural models for practical AI use cases.</p>
+                    <div class="skill-tags">
+                        <span>TensorFlow</span><span>Keras</span><span>NN Design</span>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Computer Vision (YOLOv8)</span>
-                        <span class="skill-percent">82%</span>
+                        <span class="skill-level level-strong">Strong</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 82%;"></div>
+                    <p class="skill-context">Trained and deployed object detection systems.</p>
+                    <div class="skill-tags">
+                        <span>YOLOv8</span><span>Detection</span><span>Deployment</span>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">NLP & Text Processing</span>
-                        <span class="skill-percent">78%</span>
+                        <span class="skill-level level-working">Working</span>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 78%;"></div>
+                    <p class="skill-context">Applied text processing for chatbot-style interactions.</p>
+                    <div class="skill-tags">
+                        <span>Preprocessing</span><span>Tokenization</span><span>Intent Handling</span>
                     </div>
                 </div>
             </div>

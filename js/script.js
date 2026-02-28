@@ -1,9 +1,7 @@
 // ===== TYPING ANIMATION =====
 const roles = [
-    'Software Engineer',
-    'AI/ML Enthusiast',
-    'Data Scientist',
-    'Full Stack Developer'
+    'Aspiring Software Engineer',
+    'Aspiring AI/ML Engineer',
 ];
 
 let roleIndex = 0;
