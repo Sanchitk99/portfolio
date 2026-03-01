@@ -35,56 +35,20 @@ function typeRole() {
     }
 }
 
-// ===== SIDEBAR / MOBILE MENU TOGGLE =====
+// ===== TOP NAV / MOBILE MENU TOGGLE =====
 const menuToggle = document.getElementById('menu-toggle');
-const sidebar = document.querySelector('.sidebar');
-const sidebarToggle = document.getElementById('sidebar-toggle');
-const body = document.body;
+const navLinks = document.getElementById('nav-links');
 
-function updateSidebarToggleState() {
-    if (!sidebarToggle) return;
-    const isCollapsed = body.classList.contains('sidebar-collapsed');
-    const icon = sidebarToggle.querySelector('i');
-
-    sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Open sidebar' : 'Close sidebar');
-    sidebarToggle.setAttribute('aria-expanded', String(!isCollapsed));
-
-    if (icon) {
-        icon.classList.toggle('fa-chevron-left', !isCollapsed);
-        icon.classList.toggle('fa-chevron-right', isCollapsed);
-    }
-}
-
-// make sure the button has a defined expanded state
 if (menuToggle) {
     menuToggle.setAttribute('aria-expanded', 'false');
 }
 
-if (menuToggle && sidebar) {
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        const expanded = sidebar.classList.contains('active');
-        menuToggle.setAttribute('aria-expanded', String(expanded));
-    });
-}
-
-if (sidebarToggle) {
-    updateSidebarToggleState();
-
-    sidebarToggle.addEventListener('click', (e) => {
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-
-        if (window.innerWidth <= 768 && sidebar) {
-            sidebar.classList.toggle('active');
-            const expanded = sidebar.classList.contains('active');
-            if (menuToggle) {
-                menuToggle.setAttribute('aria-expanded', String(expanded));
-            }
-            return;
-        }
-
-        body.classList.toggle('sidebar-collapsed');
-        updateSidebarToggleState();
+        navLinks.classList.toggle('active');
+        const expanded = navLinks.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', String(expanded));
     });
 }
 
@@ -92,8 +56,8 @@ if (sidebarToggle) {
 const navItems = document.querySelectorAll('.nav-item');
 navItems.forEach(item => {
     item.addEventListener('click', () => {
-        if (sidebar) {
-            sidebar.classList.remove('active');
+        if (navLinks) {
+            navLinks.classList.remove('active');
         }
         if (menuToggle) {
             menuToggle.setAttribute('aria-expanded', 'false');
@@ -103,11 +67,10 @@ navItems.forEach(item => {
 
 // Close sidebar when clicking outside
 document.addEventListener('click', (e) => {
-    if (!sidebar) return;
+    if (!navLinks) return;
     const clickedMenuToggle = menuToggle && menuToggle.contains(e.target);
-    const clickedSidebarToggle = sidebarToggle && sidebarToggle.contains(e.target);
-    if (!sidebar.contains(e.target) && !clickedMenuToggle && !clickedSidebarToggle) {
-        sidebar.classList.remove('active');
+    if (!navLinks.contains(e.target) && !clickedMenuToggle) {
+        navLinks.classList.remove('active');
         if (menuToggle) {
             menuToggle.setAttribute('aria-expanded', 'false');
         }
@@ -115,13 +78,12 @@ document.addEventListener('click', (e) => {
 });
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && sidebar) {
-        sidebar.classList.remove('active');
+    if (window.innerWidth > 980 && navLinks) {
+        navLinks.classList.remove('active');
         if (menuToggle) {
             menuToggle.setAttribute('aria-expanded', 'false');
         }
     }
-    updateSidebarToggleState();
 });
 
 // ===== ACTIVE NAV HIGHLIGHTING =====
