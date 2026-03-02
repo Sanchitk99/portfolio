@@ -23,10 +23,12 @@
                 <a href="#about" class="nav-item" data-section="about">About</a>
                 <a href="#education" class="nav-item" data-section="education">Education</a>
                 <a href="#skills" class="nav-item" data-section="skills">Skills</a>
+                <a href="#coding-progress" class="nav-item" data-section="coding-progress">Progress</a>
                 <a href="#projects" class="nav-item" data-section="projects">Projects</a>
                 <a href="#contact" class="nav-item" data-section="contact">Contact</a>
             </div>
             <div class="nav-actions">
+                <button type="button" class="btn nav-cta nav-resume" disabled title="Resume link will be added soon">Resume (Soon)</button>
                 <a href="#contact" class="btn nav-cta">Let's Talk</a>
                 <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
@@ -49,7 +51,10 @@
                     I build intelligent and scalable solutions using data. I specialize in Machine Learning, Deep Learning, and Data Analysis.
                     Currently a B.Tech student at Bennett University seeking opportunities to apply my skills to real-world challenges.
                 </p>
-                <a href="#projects" class="btn">View My Work</a>
+                <div class="hero-cta-row">
+                    <a href="#projects" class="btn">View My Work</a>
+                    <button type="button" class="btn btn-ghost" disabled title="Resume link will be added soon">Resume (Soon)</button>
+                </div>
             </div>
             <div class="hero-image">
                 <img src="assets/images/image.jpg" alt="Sanchit Kukreja">
@@ -175,22 +180,22 @@
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
-                        <span class="skill-name">C++</span>
-                        <span class="skill-level level-strong">Strong</span>
-                    </div>
-                    <p class="skill-context">Solid DSA and competitive programming foundation.</p>
-                    <div class="skill-tags">
-                        <span>STL</span><span>OOP</span><span>Problem Solving</span>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header">
                         <span class="skill-name">Java</span>
                         <span class="skill-level level-strong">Strong</span>
                     </div>
                     <p class="skill-context">Applied in object-oriented coursework and coding practice.</p>
                     <div class="skill-tags">
                         <span>OOP</span><span>Collections</span><span>Core Java</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">C++</span>
+                        <span class="skill-level level-working">Working</span>
+                    </div>
+                    <p class="skill-context">Solid DSA and competitive programming foundation.</p>
+                    <div class="skill-tags">
+                        <span>STL</span><span>OOP</span><span>Problem Solving</span>
                     </div>
                 </div>
                 <div class="skill-item">
@@ -220,7 +225,7 @@
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Deep Learning & Neural Networks</span>
-                        <span class="skill-level level-strong">Strong</span>
+                        <span class="skill-level level-working">Working</span>
                     </div>
                     <p class="skill-context">Experience with neural models for practical AI use cases.</p>
                     <div class="skill-tags">
@@ -230,7 +235,7 @@
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Computer Vision (YOLOv8)</span>
-                        <span class="skill-level level-strong">Strong</span>
+                        <span class="skill-level level-working">Working</span>
                     </div>
                     <p class="skill-context">Trained and deployed object detection systems.</p>
                     <div class="skill-tags">
@@ -248,6 +253,51 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <!-- ===== CODING PROGRESS ===== -->
+    <section id="coding-progress" class="coding-progress">
+        <h2 class="section-title">Coding Progress</h2>
+        <p class="section-subtitle">Live snapshots from my LeetCode and GitHub activity.</p>
+
+        <div class="coding-links">
+            <a href="https://leetcode.com/u/Sanxhitk99/" target="_blank" rel="noopener noreferrer">LeetCode Profile</a>
+            <a href="https://github.com/Sanchitk99" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+        </div>
+
+        <div class="coding-grid">
+            <article class="coding-card coding-card-stack">
+                <h3>LeetCode Stats</h3>
+                <div class="coding-block">
+                    <h4>Activity Heatmap</h4>
+                    <img
+                        src="https://leetcard.jacoblin.cool/Sanxhitk99?theme=dark&font=Poppins&ext=heatmap"
+                        onerror="this.onerror=null;this.src='https://leetcard.jacoblin.cool/Sanxhitk99?theme=dark&font=Poppins';"
+                        alt="LeetCode activity heatmap for Sanxhitk99"
+                        loading="lazy"
+                    />
+                </div>
+            </article>
+
+            <article class="coding-card coding-card-stack">
+                <h3>GitHub Progress</h3>
+                <div class="coding-block">
+                    <h4>Streak</h4>
+                    <img
+                        src="https://streak-stats.demolab.com?user=Sanchitk99&theme=dark&hide_border=true&background=0D1117&ring=BDEA00&fire=BDEA00&currStreakLabel=BDEA00&sideNums=F8FAFC&currStreakNum=F8FAFC&dates=94A3B8"
+                        alt="GitHub contribution streak for Sanchitk99"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="coding-block">
+                    <h4>Activity Dot Chart</h4>
+                    <img
+                        src="https://ghchart.rshah.org/BDEA00/Sanchitk99"
+                        alt="GitHub contribution dot chart for Sanchitk99"
+                        loading="lazy"
+                    />
+                </div>
+            </article>
         </div>
     </section>
     <!-- ===== PROJECTS ===== -->
@@ -294,6 +344,31 @@
             </a>
         </div>
 
+        <div class="project-card">
+            <h3>Intrusion Detection System (IDS) Dashboard</h3>
+            <p>
+                Real-time IDS dashboard that monitors system and network activity, applies machine learning threat
+                classification, and visualizes risk levels, confidence scores, and anomalies through a Flask web interface.
+            </p>
+            <a href="https://github.com/Sanchitk99/intrusion-detection"
+               class="btn" target="_blank" rel="noopener noreferrer">
+                View on GitHub
+            </a>
+        </div>
+
+        <div class="project-card">
+            <h3>AI-Driven Runoff Prediction for Flood Forecasting</h3>
+            <p>
+                <b>Currently working on this project.</b><br>
+                AI-based hydrology project using Random Forest, XGBoost, and LSTM models to forecast daily river
+                discharge from meteorological data, with extreme event evaluation for flood forecasting and climate resilience.
+            </p>
+            <a href="https://github.com/Sanchitk99/ai-based-runoff-prediction"
+               class="btn" target="_blank" rel="noopener noreferrer">
+                View on GitHub
+            </a>
+        </div>
+
     </div>
 </section>
 
@@ -301,14 +376,16 @@
     <section id="contact" class="contact">
         <div class="contact-wrapper">
             <div class="contact-form-container">
-                <span class="contact-label">CONTACT ME</span>
-                <h2 class="section-title">Let's Talk About Your Next Project</h2>
-                <p class="section-subtitle">Share a few details and get a tailored proposal in your inbox.</p>
+                <span class="contact-label">LET'S CONNECT</span>
+                <h2 class="section-title">Open to Recruiter & Contributor Outreach</h2>
+                <p class="section-subtitle">Reach out for internships, full-time roles, research, or open-source collaboration.</p>
                 
-                <form class="contact-form">
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/xaqdzzoj" method="POST">
+                    <input type="hidden" name="_subject" value="Portfolio Contact Request">
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name">Your Name <span class="required">*</span></label>
+                            <label for="name">Name <span class="required">*</span></label>
                             <input type="text" id="name" name="name" placeholder="Ex. John Doe" required>
                         </div>
                         <div class="form-group">
@@ -319,16 +396,17 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="phone">Phone <span class="required">*</span></label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                            <label for="phone">Phone / WhatsApp</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Optional">
                         </div>
                         <div class="form-group">
-                            <label for="service">I'm interested in <span class="required">*</span></label>
-                            <select id="service" name="service" required>
-                                <option value="">Select a service</option>
-                                <option value="web-development">Web Development</option>
-                                <option value="ai-ml">AI/ML Solutions</option>
-                                <option value="consulting">Consulting</option>
+                            <label for="role">I am a <span class="required">*</span></label>
+                            <select id="role" name="role" required>
+                                <option value="">Select role</option>
+                                <option value="recruiter">Recruiter / Hiring Manager</option>
+                                <option value="contributor">Contributor / Collaborator</option>
+                                <option value="maintainer">Open Source Maintainer</option>
+                                <option value="founder">Founder</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -336,35 +414,47 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="budget">Budget Range (USD)</label>
-                            <select id="budget" name="budget">
-                                <option value="">Select budget range</option>
-                                <option value="5k-10k">$5,000 - $10,000</option>
-                                <option value="10k-25k">$10,000 - $25,000</option>
-                                <option value="25k-50k">$25,000 - $50,000</option>
-                                <option value="50k+">$50,000+</option>
+                            <label for="opportunity">Opportunity Type <span class="required">*</span></label>
+                            <select id="opportunity" name="opportunity" required>
+                                <option value="">Select opportunity</option>
+                                <option value="internship">Internship</option>
+                                <option value="full-time">Full-time Role</option>
+                                <option value="part-time">Part-time Role</option>
+                                <option value="research">Research Opportunity</option>
+                                <option value="open-source">Open Source Collaboration</option>
+                                <option value="freelance">Freelance / Contract</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="country">Country</label>
-                            <select id="country" name="country">
-                                <option value="">Select Country</option>
-                                <option value="usa">United States</option>
-                                <option value="uk">United Kingdom</option>
-                                <option value="ca">Canada</option>
-                                <option value="au">Australia</option>
-                                <option value="in">India</option>
-                                <option value="other">Other</option>
+                            <label for="company">Company / Organization</label>
+                            <input type="text" id="company" name="company" placeholder="Optional">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="link">Job Post / Repo Link</label>
+                            <input type="url" id="link" name="link" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location / Work Mode</label>
+                            <select id="location" name="location">
+                                <option value="">Select preference</option>
+                                <option value="remote">Remote</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="onsite">On-site</option>
+                                <option value="flexible">Flexible</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" placeholder="Share a brief overview of your project, goals, and timeline." rows="6"></textarea>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Share role details, required skills, timeline, and next steps." rows="6"></textarea>
                     </div>
 
-                    <button type="submit" class="btn contact-btn">Send Message</button>
+                    <button type="submit" class="btn contact-btn">Send Connection Request</button>
                 </form>
             </div>
 
@@ -373,17 +463,17 @@
                     <h3><i class="fas fa-phone"></i> Contact</h3>
                     <p class="contact-detail">8178-898-360</p>
                     <p class="contact-detail">ksanchit778899@gmail.com</p>
-                    <p class="contact-note">Prefer email? Reach me directly at the address above.</p>
+                    <p class="contact-note">Best for recruiter outreach, contributor invites, and collaboration requests.</p>
                 </div>
 
                 <div class="contact-info-block">
                     <h3><i class="fas fa-clock"></i> Time</h3>
-                    <p>Always reply within 24 hours on business days.</p>
+                    <p>Usually responds within 24 hours on business days.</p>
                 </div>
 
                 <div class="contact-info-block">
-                    <h3><i class="fas fa-share-alt"></i> Stay Connected</h3>
-                    <p>Follow along for design tips and project updates.</p>
+                    <h3><i class="fas fa-share-alt"></i> Profiles</h3>
+                    <p>Review projects and connect directly on GitHub or LinkedIn.</p>
                     <div class="contact-socials">
                         <a href="https://github.com/Sanchitk99" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                             <i class="fab fa-github"></i>
@@ -393,9 +483,6 @@
                         </a>
                         <a href="mailto:ksanchit778899@gmail.com" aria-label="Email">
                             <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="#" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
                         </a>
                     </div>
                 </div>
@@ -418,6 +505,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#education">Education</a></li>
                     <li><a href="#skills">Skills</a></li>
+                    <li><a href="#coding-progress">Progress</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>

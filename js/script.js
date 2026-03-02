@@ -1,4 +1,4 @@
-// ===== TYPING ANIMATION =====
+﻿// ===== TYPING ANIMATION =====
 const roles = [
     'Aspiring Software Engineer',
     'Aspiring AI/ML Engineer',
@@ -38,10 +38,30 @@ function typeRole() {
 // ===== TOP NAV / MOBILE MENU TOGGLE =====
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
+const header = document.querySelector('.header');
+
+function syncNavHeight() {
+    if (!header) return;
+    const navHeight = Math.ceil(header.getBoundingClientRect().height);
+    if (navHeight > 0) {
+        document.documentElement.style.setProperty('--nav-height', `${navHeight}px`);
+    }
+}
+
+function scrollToSectionWithOffset(target, behavior = 'smooth') {
+    if (!target) return;
+    const navHeightRaw = getComputedStyle(document.documentElement).getPropertyValue('--nav-height');
+    const navHeight = Number.parseInt(navHeightRaw, 10) || 0;
+    const navOffset = (target.id === 'projects' || target.id === 'education' || target.id === 'coding-progress' || target.id === 'contact') ? 0 : navHeight;
+    const y = target.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({ top: Math.max(y, 0), behavior });
+}
 
 if (menuToggle) {
     menuToggle.setAttribute('aria-expanded', 'false');
 }
+
+syncNavHeight();
 
 if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', (e) => {
@@ -84,6 +104,7 @@ window.addEventListener('resize', () => {
             menuToggle.setAttribute('aria-expanded', 'false');
         }
     }
+    syncNavHeight();
 });
 
 // ===== ACTIVE NAV HIGHLIGHTING =====
@@ -158,19 +179,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (href !== '#' && document.querySelector(href)) {
             e.preventDefault();
             const target = document.querySelector(href);
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            scrollToSectionWithOffset(target, 'smooth');
         }
     });
 });
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+    syncNavHeight();
     typeRole();
     animateSkillBars();
     updateActiveNav();
+
+    if (window.location.hash) {
+        const initialTarget = document.querySelector(window.location.hash);
+        if (initialTarget) {
+            setTimeout(() => scrollToSectionWithOffset(initialTarget, 'auto'), 0);
+        }
+    }
 });
 
 // Update active nav on scroll
@@ -179,6 +205,7 @@ window.addEventListener('scroll', updateActiveNav);
 // Smooth page transitions
 window.addEventListener('load', () => {
     document.body.style.opacity = '1';
+    syncNavHeight();
 });
 
 // Add some parallax effect on mouse move for hero section
@@ -201,29 +228,38 @@ document.addEventListener('mouseleave', () => {
 // ===== CONTACT FORM HANDLING =====
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        // Log the form data (in production, send to backend)
-        console.log('Form submitted with data:', data);
-        
-        // Show success message
+
         const button = contactForm.querySelector('.contact-btn');
+        if (!button) return;
+
         const originalText = button.textContent;
-        button.textContent = 'Message Sent! ✓';
-        button.style.background = 'var(--green-accent)';
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Reset button after 3 seconds
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '';
-        }, 3000);
+        button.textContent = 'Sending...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                contactForm.reset();
+                button.textContent = 'Message Sent!';
+            } else {
+                button.textContent = 'Failed to Send';
+            }
+        } catch (error) {
+            button.textContent = 'Network Error';
+        } finally {
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 2500);
+        }
     });
 }
