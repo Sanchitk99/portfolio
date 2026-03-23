@@ -1,5 +1,4 @@
-﻿// ===== TYPING ANIMATION =====
-const roles = [
+﻿const roles = [
     'Aspiring Software Engineer',
     'Aspiring AI/ML Engineer',
 ];
