@@ -1,4 +1,4 @@
-# Sanchit Portfolio
+# Sanchit's Portfolio
 
 Personal portfolio website showcasing my background in Software Engineering and AI/ML, along with projects, education, skills, and contact details.
 
