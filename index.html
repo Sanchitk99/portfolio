@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sanchit | Software Engineer & AI/ML Developer</title>
-    <link rel="stylesheet" href="css/style.css?v=4.4" />
+    <link rel="stylesheet" href="css/style.css?v=8.1" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -14,10 +14,6 @@
     <!-- ===== TOP NAVBAR ===== -->
     <header class="header">
         <nav class="navbar">
-            <a href="#home" class="logo">
-                <span class="logo-mark">SK</span>
-                <span class="logo-text">Sanchit</span>
-            </a>
             <div class="nav-links" id="nav-links">
                 <a href="#home" class="nav-item active" data-section="home">Home</a>
                 <a href="#about" class="nav-item" data-section="about">About</a>
@@ -119,45 +115,43 @@
     <!-- ===== EDUCATION ===== -->
 <section id="education" class="education">
     <h2 class="section-title">Education</h2>
-    <div class="education-wrapper">
-        <!-- Bennett University -->
-        <div class="education-card">
-            <div class="education-left">
-                <h3 class="edu-school">Bennett University</h3>
-                <p class="edu-degree">
-                    Bachelor of Technology in Computer Science with (AI & ML)
-                </p>
-            </div>
-            <div class="education-right">
-                <span class="edu-year">Aug 2024 – Aug 2028</span>
-            </div>
-        </div>
-        <!-- VSPK International School -->
-        <div class="education-card">
-            <div class="education-left">
-                <h3 class="edu-school">VSPK International School</h3>
-                <p class="edu-degree">
-                    High School Education – PCM (Physics, Chemistry, Mathematics)
-                </p>
-            </div>
-            <div class="education-right">
-                <span class="edu-year">Apr 2016 – Apr 2023</span>
-            </div>
-        </div>
-        <!-- Ryan International School -->
-        <div class="education-card">
-            <div class="education-left">
-                <h3 class="edu-school">Ryan International School</h3>
-                <p class="edu-degree">
-                    Junior / Middle School Education
-                </p>
-            </div>
+    <div class="education-scroll" id="education-scroll">
+        <div class="edu-curve-board" id="edu-board">
+            <svg class="edu-curve-svg" viewBox="0 0 1400 620" preserveAspectRatio="none" aria-hidden="true">
+                <path class="edu-line-track" d="M 120 560 C 190 500, 220 440, 252 409 C 360 340, 500 360, 644 322 C 780 278, 900 230, 1036 174 C 1110 145, 1180 130, 1260 120" />
+                <path class="edu-line-progress" id="edu-line-progress" d="M 120 560 C 190 500, 220 440, 252 409 C 360 340, 500 360, 644 322 C 780 278, 900 230, 1036 174 C 1110 145, 1180 130, 1260 120" />
+            </svg>
 
-            <div class="education-right">
-                <span class="edu-year">Apr 2008 – Mar 2016</span>
-            </div>
-        </div>
+            <article class="edu-timeline-item edu-item-1" data-progress="0.18">
+                <span class="edu-year-tag">2008</span>
+                <span class="edu-dot"></span>
+                <div class="edu-entry-card">
+                    <h3>Ryan International School</h3>
+                    <p>Junior and middle school education with strong academic foundation years.</p>
+                    <span class="edu-duration">Apr 2008 - Mar 2016</span>
+                </div>
+            </article>
 
+            <article class="edu-timeline-item edu-item-2" data-progress="0.5">
+                <span class="edu-year-tag">2016</span>
+                <span class="edu-dot"></span>
+                <div class="edu-entry-card">
+                    <h3>VSPK International School</h3>
+                    <p>High School stream: Physics, Chemistry, and Mathematics (PCM).</p>
+                    <span class="edu-duration">Apr 2016 - Apr 2023</span>
+                </div>
+            </article>
+
+            <article class="edu-timeline-item edu-item-3" data-progress="0.78">
+                <span class="edu-year-tag">2024</span>
+                <span class="edu-dot"></span>
+                <div class="edu-entry-card">
+                    <h3>Bennett University</h3>
+                    <p>Bachelor of Technology in Computer Science with AI & ML specialization.</p>
+                    <span class="edu-duration">Aug 2024 - Aug 2028</span>
+                </div>
+            </article>
+        </div>
     </div>
 </section>
     <!-- ===== SKILLS ===== -->
@@ -537,7 +531,10 @@
             © 2025 Sanchit Kukreja. All rights reserved.
         </div>
     </footer>
+    <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/script.js?v=4.2"></script>
+    <script src="js/script.js?v=5.2"></script>
 </body>
 </html>

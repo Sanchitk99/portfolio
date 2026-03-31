@@ -38,6 +38,9 @@ function typeRole() {
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
 const header = document.querySelector('.header');
+const scrollTopBtn = document.getElementById('scroll-top-btn');
+let updateEducationTimeline = null;
+let updateEducationTitleLock = null;
 
 function syncNavHeight() {
     if (!header) return;
@@ -52,7 +55,8 @@ function scrollToSectionWithOffset(target, behavior = 'smooth') {
     const navHeightRaw = getComputedStyle(document.documentElement).getPropertyValue('--nav-height');
     const navHeight = Number.parseInt(navHeightRaw, 10) || 0;
     const navOffset = (target.id === 'projects' || target.id === 'education' || target.id === 'coding-progress' || target.id === 'contact') ? 0 : navHeight;
-    const y = target.getBoundingClientRect().top + window.scrollY - navOffset;
+    const sectionScrollBoost = target.id === 'skills' ? 36 : 0;
+    const y = target.getBoundingClientRect().top + window.scrollY - navOffset + sectionScrollBoost;
     window.scrollTo({ top: Math.max(y, 0), behavior });
 }
 
@@ -104,6 +108,12 @@ window.addEventListener('resize', () => {
         }
     }
     syncNavHeight();
+    if (updateEducationTimeline) {
+        updateEducationTimeline();
+    }
+    if (updateEducationTitleLock) {
+        updateEducationTitleLock();
+    }
 });
 
 // ===== ACTIVE NAV HIGHLIGHTING =====
@@ -128,23 +138,181 @@ function updateActiveNav() {
     });
 }
 
-// ===== SCROLL REVEAL ANIMATION =====
-const observer = new IntersectionObserver((entries) => {
+function updateScrollTopVisibility() {
+    if (!scrollTopBtn) return;
+    const shouldShow = window.scrollY > 420;
+    scrollTopBtn.classList.toggle('show', shouldShow);
+}
+
+function setupEducationTimeline() {
+    const educationScroll = document.getElementById('education-scroll');
+    const educationBoard = document.getElementById('edu-board');
+    const progressPath = document.getElementById('edu-line-progress');
+    const milestones = document.querySelectorAll('.edu-timeline-item[data-progress]');
+
+    if (!educationScroll || !educationBoard || !progressPath || milestones.length === 0) return;
+
+    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let pathLength = 0;
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const activateMilestones = (progress) => {
+        milestones.forEach((milestone) => {
+            const triggerPoint = Number.parseFloat(milestone.dataset.progress) || 0;
+            milestone.classList.toggle('is-active', progress >= triggerPoint);
+        });
+    };
+
+    const setupPath = () => {
+        pathLength = progressPath.getTotalLength();
+        progressPath.style.strokeDasharray = `${pathLength}`;
+        progressPath.style.strokeDashoffset = `${pathLength}`;
+    };
+
+    const positionMilestonesOnPath = () => {
+        if (window.innerWidth <= 980 || pathLength <= 0) {
+            milestones.forEach((milestone) => {
+                milestone.style.removeProperty('left');
+                milestone.style.removeProperty('top');
+            });
+            return;
+        }
+
+        const svg = progressPath.ownerSVGElement;
+        const viewBox = svg && svg.viewBox ? svg.viewBox.baseVal : null;
+        if (!svg || !viewBox || !viewBox.width || !viewBox.height) return;
+
+        const scaleX = educationBoard.offsetWidth / viewBox.width;
+        const scaleY = educationBoard.offsetHeight / viewBox.height;
+
+        milestones.forEach((milestone) => {
+            const progressPoint = clamp(Number.parseFloat(milestone.dataset.progress) || 0, 0, 1);
+            const point = progressPath.getPointAtLength(pathLength * progressPoint);
+            milestone.style.left = `${point.x * scaleX}px`;
+            milestone.style.top = `${point.y * scaleY}px`;
+        });
+    };
+
+    const renderEducationTimeline = () => {
+        if (window.innerWidth <= 980 || reduceMotionQuery.matches) {
+            progressPath.style.strokeDashoffset = '0';
+            milestones.forEach((milestone) => milestone.classList.add('is-active'));
+            return;
+        }
+
+        const rect = educationScroll.getBoundingClientRect();
+        const stickyTop = Number.parseFloat(getComputedStyle(educationBoard).top) || 0;
+        const totalDistance = Math.max(educationScroll.offsetHeight - educationBoard.offsetHeight, 1);
+        const traveledDistance = clamp(stickyTop - rect.top, 0, totalDistance);
+        const progress = traveledDistance / totalDistance;
+
+        progressPath.style.strokeDashoffset = `${pathLength * (1 - progress)}`;
+        activateMilestones(progress);
+    };
+
+    setupPath();
+    positionMilestonesOnPath();
+    renderEducationTimeline();
+
+    updateEducationTimeline = renderEducationTimeline;
+
+    window.addEventListener('resize', () => {
+        setupPath();
+        positionMilestonesOnPath();
+        renderEducationTimeline();
+    });
+
+    if (typeof reduceMotionQuery.addEventListener === 'function') {
+        reduceMotionQuery.addEventListener('change', renderEducationTimeline);
+    }
+}
+
+function setupEducationTitleLock() {
+    const educationSection = document.getElementById('education');
+    const educationScroll = document.getElementById('education-scroll');
+    const educationBoard = document.getElementById('edu-board');
+    const educationTitle = educationSection ? educationSection.querySelector('.section-title') : null;
+
+    if (!educationSection || !educationScroll || !educationBoard || !educationTitle) return;
+
+    const renderEducationTitleLock = () => {
+        if (window.innerWidth <= 980) {
+            educationSection.classList.remove('edu-title-fixed');
+            educationSection.style.removeProperty('--edu-title-fixed-left');
+            return;
+        }
+
+        const navHeightRaw = getComputedStyle(document.documentElement).getPropertyValue('--nav-height');
+        const navHeight = Number.parseFloat(navHeightRaw) || 0;
+        const stickyTop = navHeight + 6;
+        const scrollRect = educationScroll.getBoundingClientRect();
+        const sectionRect = educationSection.getBoundingClientRect();
+        const totalDistance = Math.max(educationScroll.offsetHeight - educationBoard.offsetHeight, 1);
+        const traveledDistance = Math.min(Math.max(stickyTop - scrollRect.top, 0), totalDistance);
+        const progress = traveledDistance / totalDistance;
+
+        // Keep title locked during the active timeline draw window only.
+        const lockStart = scrollRect.top <= stickyTop;
+        const lockEnd = progress >= 0.998 || scrollRect.bottom <= stickyTop;
+        const shouldLock = lockStart && !lockEnd;
+
+        educationSection.classList.toggle('edu-title-fixed', shouldLock);
+
+        if (shouldLock) {
+            const sectionStyles = getComputedStyle(educationSection);
+            const paddingLeft = Number.parseFloat(sectionStyles.paddingLeft) || 0;
+            const fixedLeft = Math.max(sectionRect.left + paddingLeft, 12);
+            educationSection.style.setProperty('--edu-title-fixed-left', `${fixedLeft}px`);
+        } else {
+            educationSection.style.removeProperty('--edu-title-fixed-left');
+        }
+    };
+
+    renderEducationTitleLock();
+    updateEducationTitleLock = renderEducationTitleLock;
+}
+
+// ===== SECTION REVEAL ANIMATION =====
+const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('reveal');
-            observer.unobserve(entry.target);
+            entry.target.classList.add('section-in');
+            sectionObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -12% 0px'
+});
+
+document.querySelectorAll('main > section:not(#home)').forEach(section => {
+    section.classList.add('section-reveal');
+    sectionObserver.observe(section);
+});
+
+// ===== CARD REVEAL ANIMATION =====
+const cardRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-in');
+            cardRevealObserver.unobserve(entry.target);
         }
     });
 }, {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -70px 0px'
 });
 
 // Observe all cards and content
-document.querySelectorAll('.education-card, .skill-item, .project-card, .skills-column').forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
+const revealTargets = document.querySelectorAll('.education-card, .skill-item, .project-card, .skills-column');
+const revealDirections = ['up', 'left', 'right', 'zoom'];
+
+revealTargets.forEach((el, index) => {
+    el.classList.add('reveal-ready');
+    el.dataset.reveal = revealDirections[index % revealDirections.length];
+    el.style.setProperty('--reveal-delay', `${(index % 8) * 70}ms`);
+    cardRevealObserver.observe(el);
 });
 
 // ===== SKILL BAR ANIMATION =====
@@ -189,6 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
     typeRole();
     animateSkillBars();
     updateActiveNav();
+    updateScrollTopVisibility();
+    setupEducationTimeline();
+    setupEducationTitleLock();
 
     if (window.location.hash) {
         const initialTarget = document.querySelector(window.location.hash);
@@ -198,8 +369,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Update active nav on scroll
-window.addEventListener('scroll', updateActiveNav);
+// Update active nav + scroll-top visibility on scroll
+window.addEventListener('scroll', () => {
+    updateActiveNav();
+    updateScrollTopVisibility();
+    if (updateEducationTimeline) {
+        updateEducationTimeline();
+    }
+    if (updateEducationTitleLock) {
+        updateEducationTitleLock();
+    }
+});
+
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
 // Smooth page transitions
 window.addEventListener('load', () => {
