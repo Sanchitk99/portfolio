@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sanchit | Software Engineer & AI/ML Developer</title>
-    <link rel="stylesheet" href="css/style.css?v=8.1" />
+    <link rel="stylesheet" href="css/style.css?v=9.4" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -21,6 +21,7 @@
                 <a href="#skills" class="nav-item" data-section="skills">Skills</a>
                 <a href="#coding-progress" class="nav-item" data-section="coding-progress">Progress</a>
                 <a href="#projects" class="nav-item" data-section="projects">Projects</a>
+                <a href="#certifications" class="nav-item" data-section="certifications">Certifications</a>
                 <a href="#contact" class="nav-item" data-section="contact">Contact</a>
             </div>
             <div class="nav-actions">
@@ -122,35 +123,35 @@
                 <path class="edu-line-progress" id="edu-line-progress" d="M 120 560 C 190 500, 220 440, 252 409 C 360 340, 500 360, 644 322 C 780 278, 900 230, 1036 174 C 1110 145, 1180 130, 1260 120" />
             </svg>
 
-            <article class="edu-timeline-item edu-item-1" data-progress="0.18">
-                <span class="edu-year-tag">2008</span>
-                <span class="edu-dot"></span>
-                <div class="edu-entry-card">
-                    <h3>Ryan International School</h3>
-                    <p>Junior and middle school education with strong academic foundation years.</p>
-                    <span class="edu-duration">Apr 2008 - Mar 2016</span>
-                </div>
-            </article>
+        <article class="edu-timeline-item edu-item-1" data-progress="0.18">
+            <span class="edu-year-tag">2008</span>
+            <span class="edu-dot"></span>
+            <div class="edu-entry-card">
+                <h3>Ryan International School</h3>
+                <p>Junior and middle school education with strong academic foundation years.</p>
+                <span class="edu-duration">Apr 2008 - Mar 2016</span>
+            </div>
+        </article>
 
-            <article class="edu-timeline-item edu-item-2" data-progress="0.5">
-                <span class="edu-year-tag">2016</span>
-                <span class="edu-dot"></span>
-                <div class="edu-entry-card">
-                    <h3>VSPK International School</h3>
-                    <p>High School stream: Physics, Chemistry, and Mathematics (PCM).</p>
-                    <span class="edu-duration">Apr 2016 - Apr 2023</span>
-                </div>
-            </article>
+        <article class="edu-timeline-item edu-item-2" data-progress="0.5">
+            <span class="edu-year-tag">2016</span>
+            <span class="edu-dot"></span>
+            <div class="edu-entry-card">
+                <h3>VSPK International School</h3>
+                <p>High School stream: Physics, Chemistry, and Mathematics (PCM).</p>
+                <span class="edu-duration">Apr 2016 - Apr 2023</span>
+            </div>
+        </article>
 
-            <article class="edu-timeline-item edu-item-3" data-progress="0.78">
-                <span class="edu-year-tag">2024</span>
-                <span class="edu-dot"></span>
-                <div class="edu-entry-card">
-                    <h3>Bennett University</h3>
-                    <p>Bachelor of Technology in Computer Science with AI & ML specialization.</p>
-                    <span class="edu-duration">Aug 2024 - Aug 2028</span>
-                </div>
-            </article>
+        <article class="edu-timeline-item edu-item-3" data-progress="0.78">
+            <span class="edu-year-tag">2024</span>
+            <span class="edu-dot"></span>
+            <div class="edu-entry-card">
+                <h3>Bennett University</h3>
+                <p>Bachelor of Technology in Computer Science with AI & ML specialization.</p>
+                <span class="edu-duration">Aug 2024 - Aug 2028</span>
+            </div>
+        </article>
         </div>
     </div>
 </section>
@@ -297,87 +298,25 @@
     <!-- ===== PROJECTS ===== -->
 <section id="projects" class="projects">
     <h2>Projects</h2>
-    <div class="project-grid">
+    <p class="section-subtitle">Hover or tap a project to explore the full build details, stack, and impact.</p>
+    <div class="project-grid" id="project-grid"></div>
+</section>
 
-        <!-- Weapon Detection Project (NEW) -->
-        <div class="project-card">
-            <h3>Weapon Detection System</h3>
-            <p>
-                End-to-end computer vision application that detects
-                <b>guns and knives</b> in images using <b>YOLOv8</b>.
-                Includes model training, inference, and a live deployed
-                Streamlit web application.
-            </p>
-                <a href="https://github.com/Sanchitk99/weapon-detection"
-                   class="btn"
-                   target="_blank" rel="noopener noreferrer">
-                    View on GitHub
-                </a>
+<section id="certifications" class="certifications">
+    <h2 class="section-title">Certifications</h2>
+    <p class="section-subtitle">Focused coursework and credentials that sharpen my machine learning and software engineering foundation.</p>
+    <div class="certification-carousel" id="certification-carousel">
+        <button class="cert-nav cert-nav-prev" id="cert-prev" type="button" aria-label="Show previous certificate">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="cert-track-viewport" id="cert-viewport" aria-live="polite">
+            <div class="certification-grid" id="certification-grid"></div>
         </div>
-
-        <div class="project-card">
-            <h3>FixMyCampus</h3>
-            <p>
-                <b>Currently working on this project.</b><br>
-                University-based ticketing system built to report and resolve campus civic issues efficiently.
-                It helps students raise complaints, track issue status, and improve coordination around maintenance
-                and infrastructure problems.
-            </p>
-            <a href="https://github.com/Sanchitk99/FixMyCampus"
-               class="btn" target="_blank" rel="noopener noreferrer">
-                View on GitHub
-            </a>
-        </div>
-
-        <!-- Existing Projects -->
-        <div class="project-card">
-            <h3>Python Voice Assistant Chatbot</h3>
-            <p>
-                Voice assistant built in Python that plays music, opens apps,
-                searches Wikipedia, and performs speech-to-text and text-to-speech.
-            </p>
-            <a href="https://github.com/Sanchitk99/ChatBot" class="btn" target="_blank" rel="noopener noreferrer">
-                View on GitHub
-            </a>
-        </div>
-
-        <div class="project-card">
-            <h3>Smart Demand Forecasting & Shipment Delay Prediction</h3>
-            <p>
-                ML project to forecast demand and predict shipment delays using real-world data.
-            </p>
-            <a href="https://github.com/Sanchitk99/Smart-Demand-Forecasting-and-Shipment-Delay-Prediction"
-               class="btn" target="_blank" rel="noopener noreferrer">
-                View on GitHub
-            </a>
-        </div>
-
-        <div class="project-card">
-            <h3>Intrusion Detection System (IDS) Dashboard</h3>
-            <p>
-                Real-time IDS dashboard that monitors system and network activity, applies machine learning threat
-                classification, and visualizes risk levels, confidence scores, and anomalies through a Flask web interface.
-            </p>
-            <a href="https://github.com/Sanchitk99/intrusion-detection"
-               class="btn" target="_blank" rel="noopener noreferrer">
-                View on GitHub
-            </a>
-        </div>
-
-        <div class="project-card">
-            <h3>AI-Driven Runoff Prediction for Flood Forecasting</h3>
-            <p>
-                <b>Currently working on this project.</b><br>
-                AI-based hydrology project using Random Forest, XGBoost, and LSTM models to forecast daily river
-                discharge from meteorological data, with extreme event evaluation for flood forecasting and climate resilience.
-            </p>
-            <a href="https://github.com/Sanchitk99/ai-based-runoff-prediction"
-               class="btn" target="_blank" rel="noopener noreferrer">
-                View on GitHub
-            </a>
-        </div>
-
+        <button class="cert-nav cert-nav-next" id="cert-next" type="button" aria-label="Show next certificate">
+            <i class="fas fa-chevron-right"></i>
+        </button>
     </div>
+    <div class="cert-dots" id="cert-dots" aria-label="Certification slider navigation"></div>
 </section>
 
     <!-- ===== CONTACT ===== -->
@@ -498,6 +437,10 @@
         </div>
     </section>
     </main>
+
+    <div id="project-detail-shell" class="project-detail-shell" aria-hidden="true">
+        <article id="project-detail-panel" class="project-detail-panel" role="dialog" aria-modal="false" aria-labelledby="project-detail-title"></article>
+    </div>
     
     <!-- ===== FOOTER ===== -->
     <footer class="footer-gradient">
@@ -515,6 +458,7 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#coding-progress">Progress</a></li>
                     <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -531,10 +475,8 @@
             © 2025 Sanchit Kukreja. All rights reserved.
         </div>
     </footer>
-    <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/script.js?v=5.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+    <script src="js/script.js?v=8.7"></script>
 </body>
 </html>
