@@ -2675,14 +2675,6 @@ section {
     line-height: 1.72;
 }
 
-.project-progress-note {
-    color: var(--primary);
-    font-size: 0.9rem;
-    font-weight: 600;
-    line-height: 1.45;
-    margin-top: -0.15rem;
-}
-
 .project-actions {
     display: flex;
     flex-wrap: wrap;

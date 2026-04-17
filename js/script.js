@@ -1,4 +1,4 @@
-const roles = [
+﻿const roles = [
     'Aspiring Software Engineer',
     'Aspiring AI/ML Engineer',
 ];
@@ -240,7 +240,6 @@ function renderProjects() {
     if (!projectGrid) return;
 
     const trailingProjectIds = ['fix-my-campus', 'runoff-prediction'];
-    const workingProjectIds = new Set(trailingProjectIds);
     const orderedProjects = [
         ...projectData.filter((project) => !trailingProjectIds.includes(project.id)),
         ...trailingProjectIds
@@ -252,7 +251,6 @@ function renderProjects() {
         <article class="project-card" data-project-id="${escapeHtml(project.id)}">
             <h3>${escapeHtml(project.title)}</h3>
             <p class="project-summary">${escapeHtml(project.description)}</p>
-            ${workingProjectIds.has(project.id) ? '<p class="project-progress-note">Currently working on this project</p>' : ''}
             <div class="project-actions">
                 <a href="${escapeHtml(project.github_link)}" class="btn" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-github"></i> View on GitHub
