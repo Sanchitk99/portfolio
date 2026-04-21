@@ -796,7 +796,11 @@ function setupEducationTimeline() {
         const navHeightRaw = getComputedStyle(document.documentElement).getPropertyValue('--nav-height');
         const navHeight = Number.parseInt(navHeightRaw, 10) || 0;
         const sectionRect = educationSection.getBoundingClientRect();
-        const lockTitle = sectionRect.top <= navHeight + 8 && sectionRect.bottom >= window.innerHeight * 0.4;
+        const scrollRect = educationScroll.getBoundingClientRect();
+        const boardHeight = educationBoard.getBoundingClientRect().height;
+        const boardTopOffset = Number.parseFloat(getComputedStyle(educationBoard).top) || 0;
+        const boardIsPinned = scrollRect.top <= boardTopOffset && scrollRect.bottom >= boardTopOffset + boardHeight;
+        const lockTitle = sectionRect.top <= navHeight + 8 && boardIsPinned;
         educationSection.classList.toggle('edu-title-fixed', lockTitle);
 
         if (window.innerWidth <= 980) {
@@ -807,9 +811,9 @@ function setupEducationTimeline() {
             return;
         }
 
-        const scrollRect = educationScroll.getBoundingClientRect();
         const usableDistance = Math.max(scrollRect.height - window.innerHeight, 1);
-        const scrollProgress = clamp01(-scrollRect.top / usableDistance);
+        const rawProgress = clamp01(-scrollRect.top / usableDistance);
+        const scrollProgress = clamp01(rawProgress / 0.92);
 
         if (lineLength > 0) {
             educationLineProgress.style.strokeDashoffset = `${(1 - scrollProgress) * lineLength}`;

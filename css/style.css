@@ -689,7 +689,7 @@ section {
 /* ===== EDUCATION SECTION ===== */
 .education {
     --edu-title-sticky-top: calc(var(--nav-height) + 0.35rem);
-    --edu-title-lane: clamp(3.6rem, 8vw, 5rem);
+    --edu-title-lane: clamp(2.8rem, 6vw, 4rem);
     --edu-title-fixed-left: clamp(1.5rem, 4vw, 3rem);
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.76), rgba(18, 24, 13, 0.82));
     position: relative;
@@ -702,11 +702,11 @@ section {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: sticky;
-    top: var(--edu-title-sticky-top);
+    position: relative;
+    top: auto;
     z-index: 12;
     width: fit-content;
-    margin-bottom: 0;
+    margin-bottom: 0.7rem;
 }
 
 .education.edu-title-fixed .section-title {
@@ -721,14 +721,14 @@ section {
     position: relative;
     max-width: 1600px;
     height: 260svh;
-    padding-top: var(--edu-title-lane);
+    padding-top: 0;
     margin: 0 auto;
 }
 
 .edu-curve-board {
     position: sticky;
     top: calc(var(--edu-title-sticky-top) + var(--edu-title-lane));
-    height: clamp(560px, calc(100svh - (var(--edu-title-sticky-top) + var(--edu-title-lane) + 0.9rem)), 760px);
+    height: clamp(520px, calc(100dvh - (var(--edu-title-sticky-top) + var(--edu-title-lane) + 1.25rem)), 740px);
     width: 100%;
     border: 1px solid var(--border-color);
     border-radius: 24px;
