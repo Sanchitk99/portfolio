@@ -20,7 +20,7 @@ const projectData = [
         results: 'Delivered a working YOLOv8-based detection app with clear UI outputs and reliable weapon localization suitable for demos, learning, and safety-focused CV experimentation.',
         tools_frameworks: ['Ultralytics', 'PyTorch', 'OpenCV', 'Streamlit', 'NumPy', 'Git'],
         github_link: 'https://github.com/Sanchitk99/weapon-detection',
-        demo_link: '',
+        demo_link: 'https://weapon-detection-sanchitk99.streamlit.app',
         preview_image: '',
     },
     {
