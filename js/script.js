@@ -5,6 +5,25 @@
 
 const projectData = [
     {
+        id: 'winter-arc-project',
+        title: 'Winter Arc Project',
+        description: 'Focused personal-development project built around consistent learning, goal tracking, and measurable progress.',
+        full_explanation: 'The Winter Arc Project turns a focused season of growth into a structured system for setting priorities, building daily habits, and reviewing progress over time.',
+        tech_stack: ['Goal Setting', 'Habit Tracking', 'Time Management', 'Progress Reviews'],
+        features: [
+            'Clear goals broken into practical weekly and daily actions',
+            'Habit tracking to make consistency visible and measurable',
+            'Focused learning blocks for steady skill development',
+            'Regular progress reviews to adjust priorities and stay accountable',
+        ],
+        approach: 'I organized the project around a small set of meaningful goals, repeatable routines, and lightweight reviews so progress stays sustainable instead of becoming a one-time burst of motivation.',
+        results: 'Created a simple, repeatable framework for maintaining momentum, tracking growth, and turning long-term intentions into consistent action.',
+        tools_frameworks: ['Planning', 'Habit Tracking', 'Time Management', 'Reflection'],
+        github_link: '',
+        demo_link: '',
+        preview_image: '',
+    },
+    {
         id: 'weapon-detection',
         title: 'Weapon Detection System',
         description: 'End-to-end computer vision application that detects guns and knives in images using YOLOv8, with model training, inference, and a live Streamlit web interface.',
@@ -252,9 +271,11 @@ function renderProjects() {
             <h3>${escapeHtml(project.title)}</h3>
             <p class="project-summary">${escapeHtml(project.description)}</p>
             <div class="project-actions">
-                <a href="${escapeHtml(project.github_link)}" class="btn" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
+                ${project.github_link
+                    ? `<a href="${escapeHtml(project.github_link)}" class="btn" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>`
+                    : '<span class="project-link-note">Project details available on hover or tap</span>'}
             </div>
         </article>
     `).join('');
@@ -848,6 +869,11 @@ function renderFeatureList(items) {
 }
 
 function buildProjectDetailMarkup(project) {
+    const githubButton = project.github_link
+        ? `<a href="${escapeHtml(project.github_link)}" class="btn" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> GitHub
+        </a>`
+        : '<button type="button" class="btn" disabled>GitHub Link Soon</button>';
     const demoButton = project.demo_link
         ? `<a href="${escapeHtml(project.demo_link)}" class="btn btn-ghost" target="_blank" rel="noopener noreferrer"><i class="fas fa-up-right-from-square"></i> Live Demo</a>`
         : '<button type="button" class="btn btn-ghost" disabled>Live Demo Soon</button>';
@@ -891,9 +917,7 @@ function buildProjectDetailMarkup(project) {
             <div class="detail-section">
                 <h4>Links</h4>
                 <div class="detail-links">
-                    <a href="${escapeHtml(project.github_link)}" class="btn" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
+                    ${githubButton}
                     ${demoButton}
                 </div>
             </div>

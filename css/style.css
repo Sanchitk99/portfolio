@@ -2687,6 +2687,12 @@ section {
     align-self: auto;
 }
 
+.project-link-note {
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
 .project-detail-btn {
     background: transparent;
     color: var(--primary);
