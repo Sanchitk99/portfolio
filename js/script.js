@@ -19,8 +19,8 @@ const projectData = [
         approach: 'I organized the project around a small set of meaningful goals, repeatable routines, and lightweight reviews so progress stays sustainable instead of becoming a one-time burst of motivation.',
         results: 'Created a simple, repeatable framework for maintaining momentum, tracking growth, and turning long-term intentions into consistent action.',
         tools_frameworks: ['Planning', 'Habit Tracking', 'Time Management', 'Reflection'],
-        github_link: '',
-        demo_link: '',
+        github_link: 'https://github.com/Sanchitk99/winter-arc',
+        demo_link: 'https://winterarcmode.netlify.app/',
         preview_image: '',
     },
     {
@@ -275,7 +275,12 @@ function renderProjects() {
                     ? `<a href="${escapeHtml(project.github_link)}" class="btn" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-github"></i> View on GitHub
                     </a>`
-                    : '<span class="project-link-note">Project details available on hover or tap</span>'}
+                    : ''}
+                ${project.demo_link
+                    ? `<a href="${escapeHtml(project.demo_link)}" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-up-right-from-square"></i> Live Demo
+                    </a>`
+                    : (!project.github_link ? '<span class="project-link-note">Project details available on hover or tap</span>' : '')}
             </div>
         </article>
     `).join('');
