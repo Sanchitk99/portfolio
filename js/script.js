@@ -1,9 +1,30 @@
-﻿const roles = [
+const roles = [
     'Aspiring Software Engineer',
     'Aspiring AI/ML Engineer',
 ];
 
 const projectData = [
+    {
+        id: 'research-intelligence-engine',
+        title: 'Research Intelligence Engine (RIE)',
+        description: 'Production-grade Hybrid RAG engine for scientific literature synthesis, featuring dual-index retrieval (Qdrant + BM25), verbatim page-level citations, and zero-hallucination guardrails.',
+        full_explanation: 'The Research Intelligence Engine (RIE) is a production-grade Retrieval-Augmented Generation (RAG) platform designed to synthesize factual, verifiable answers across scientific research papers. It features a dual-index architecture pairing local embedded Qdrant (384-dimensional dense vectors) with Okapi BM25 lexical search via Reciprocal Rank Fusion (k=60). It enforces zero-hallucination guardrails through deterministic citation validation against exact passage excerpts and explicit abstention triggers when evidence is insufficient.',
+        tech_stack: ['Hybrid RAG', 'Python', 'FastAPI', 'Qdrant', 'Next.js 15', 'Sentence-Transformers', 'Okapi BM25'],
+        features: [
+            'Dual-index hybrid retrieval combining embedded Qdrant (RocksDB) and Okapi BM25 via Reciprocal Rank Fusion (k=60)',
+            'Boundary-aware document chunking and physical page-level provenance tracking using PyMuPDF',
+            'Strict citation verification ensuring 100% syntactic validity and verbatim passage excerpt faithfulness',
+            'Deterministic abstention safeguards returning explicit out_of_scope or insufficient_evidence signals with 0 citations',
+            'Multi-provider LLM support (Gemini, OpenAI, Groq, Ollama, deterministic Mock) with structured schema validation',
+            'Full-stack architecture featuring a Next.js 15 App Router interface, FastAPI REST API, and real-time vector telemetry',
+        ],
+        approach: 'Engineered an evidence-first RAG pipeline prioritizing factual grounding over generative freedom: parsed multi-page PDFs with physical page tracking, segmented text into sentence-preserved chunks, implemented hybrid retrieval achieving +25% relative Hit@5 gain over dense baseline, and integrated post-generation citation validation requiring verbatim substring alignment before output serialization.',
+        results: 'Demonstrated superior retrieval with 83.3% Hit@5 (+16.6% absolute / +25% relative over dense baseline), 0.4509 MRR@5, 0.0% unsupported-answer risk across grounded benchmarks, and 100% compliance on citation faithfulness and out-of-scope abstention.',
+        tools_frameworks: ['FastAPI', 'Qdrant (RocksDB)', 'Next.js 15', 'PyTorch', 'Sentence-Transformers', 'PyMuPDF', 'Okapi BM25', 'Tailwind CSS', 'Docker', 'Git'],
+        github_link: 'https://github.com/Sanchitk99/research-intelligence-engine',
+        demo_link: '',
+        preview_image: '',
+    },
     {
         id: 'winter-arc-project',
         title: 'Winter Arc Project',
